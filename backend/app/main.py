@@ -11,8 +11,7 @@ import os
 from contextlib import asynccontextmanager
 
 # Import routers
-from app.routes import auth, users, expenses, approvals
-
+from .routes import auth, users, expenses, approvals
 # Database initialization
 DATABASE_PATH = "expenses.db"
 
