@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import sqlite3
 from contextlib import asynccontextmanager
+from fastapi import FastAPI
 
 # Import routers
 from .routes import auth, users, expenses, approvals
@@ -157,6 +158,26 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to Expense Approval System"}
+
+@app.get("/api/expenses/")
+def get_expenses():
+    # Add logic here to retrieve and return a list of expenses
+    # For example, you might fetch data from your database.
+    return {"message": "Endpoint for getting expenses is now working"}
+
+@app.get("/api/approvals/")
+def get_approvals():
+    # Add logic here to retrieve and return a list of approvals
+    return {"message": "Endpoint for getting approvals is now working"}
+
+@app.post("/")
+def handle_post_root(data: dict):
+    # Handle the POST request data here
+    return {"received": data}
+
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
@@ -165,6 +186,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+@app.post("/api/auth/login")
+def login(credentials: dict):
+    # Add logic here to validate user credentials
+    # and return an authentication token or a success message.
+    return {"message": "Login endpoint is now configured to accept POST requests"}
 
 # Exception handler
 @app.exception_handler(Exception)
