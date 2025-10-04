@@ -1,8 +1,7 @@
-# backend/app/routes/auth.py
 from fastapi import APIRouter
+from passlib.context import CryptContext
+import sqlite3
+from ..config import DATABASE_PATH
 
 router = APIRouter()
-
-@router.post("/login")
-def login(username: str, password: str):
-    return {"message": f"Logged in as {username}"}
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
