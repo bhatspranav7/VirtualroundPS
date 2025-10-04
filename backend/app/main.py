@@ -11,7 +11,8 @@ from contextlib import asynccontextmanager
 
 # Import routers
 from .routes import auth, users, expenses, approvals
-from .config import DATABASE_PATH
+from .config import DATABASE_PATH, DATABASE_URL, SECRET_KEY, DEBUG
+import os
 
 # Database initialization functions
 def init_database():
@@ -94,8 +95,9 @@ def init_database():
 def insert_sample_data(cursor):
     from passlib.context import CryptContext
 
-    pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+    pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
     hashed_password = pwd_context.hash("password123")
+
 
     # Insert sample users
     cursor.execute("SELECT COUNT(*) FROM users")

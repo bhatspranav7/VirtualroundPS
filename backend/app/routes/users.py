@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException
 from typing import List
 from pydantic import BaseModel
 import sqlite3
-from ..main import DATABASE_PATH
+from ..config import DATABASE_PATH, SECRET_KEY
 
 router = APIRouter()
 
